@@ -11,21 +11,25 @@ def main(
         insulation_steps=3,
         # The number of insulation is higher, which means the object position is more accurately controlled, but the boundaries may be more obvious.
         num_inference_steps=30,  # Sampling steps
-        cross_replace_steps=0.5,  # Reweight execution steps(ratio)
+        cross_replace_steps=1.0,  # Reweight execution steps(ratio)
         seed=0,
-        min_area=0.2,  # Minimum layout area, adjust according to the number of regions
-        addition=0.2  # embed addition coefficient
+        min_area=0.12,  # Minimum layout area, adjust according to the number of regions
+        addition=0.4  # embed addition coefficient
 ):
-    prompt = "A retro book cover showing a detective holding a magnifying glass with 'Crime Scene' in bold, a title at the top that says 'The Mystery' in large italic, and the author name at the bottom with 'Coming Soon' in small regular letters."
+    prompt = "A movie poster with the title 'Summer Escape' in large bold white letters at the top, a tagline reading 'Feel the Adventure' in medium italic, a rating with '8.3/10' in small regular, a director name 'J. Doe' in medium, and a release date 'July 2025' in small."
     carrier_list = [
-        "glass",
         "title",
-        "name"
+        "tagline",
+        "rating",
+        "name",
+        "date"
     ]
     sentence_list = [
-        "a magnifying glass with 'Crime Scene' in bold.",
-        "a title at the top that says 'The Mystery' in large italic.",
-        "the author name at the bottom with 'Coming Soon' in small regular letters."
+        "the title 'Summer Escape' in large bold white letters at the top.",
+        "a tagline reading 'Feel the Adventure' in medium italic.",
+        "a rating with '8.3/10' in small regular.",
+        "a director name 'J. Doe' in medium.",
+        "a release date 'July 2025' in small."
     ]
 
     height, width = 1024, 1024

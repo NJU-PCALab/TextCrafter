@@ -19,9 +19,9 @@ def inference(
         pre_generation_steps=8,
         insulation_steps=3,
         num_inference_steps=30,  # Sampling steps
-        cross_replace_steps=0.5,  # Reweight execution steps(ratio)
+        cross_replace_steps=1.0,  # Reweight execution steps(ratio)
         seed=0,
-        addition=0.2,  # embed addition coefficient
+        addition=0.4,  # embed addition coefficient
         height=1024,
         width=1024,
         rectangle_name=None,

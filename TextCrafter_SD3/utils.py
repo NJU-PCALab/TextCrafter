@@ -144,7 +144,7 @@ class AttentionReweight(AttentionControlEdit):
 def get_equalizer(text: str,tokenizer):
     inds = get_quote_inds(text, tokenizer)
     values = torch.tensor(len(inds), dtype=TORCH_DTYPE)
-    values = 1+0.2*torch.tanh(0.5*values)
+    values = 1+0.5*torch.tanh(0.5*values)
     equalizer = torch.full((1, MAX_NUM_WORDS), 1.0, dtype=TORCH_DTYPE)
     equalizer[:, inds] = values
     return equalizer
