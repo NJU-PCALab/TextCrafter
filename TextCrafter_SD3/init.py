@@ -1,6 +1,6 @@
 import torch
 
-def init_forwards_sd3(self, root_module: torch.nn.Module):
+def init_forwards(self, root_module: torch.nn.Module):
     for name, module in root_module.named_modules():
         if "attn" in name and "transformer_blocks" in name and module.__class__.__name__ == "Attention":
             module.forward = SD3TransformerBlock_init_forward(self, module)

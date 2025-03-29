@@ -6,7 +6,7 @@ import json
 import random
 
 from textcrafter_pipeline_sd3 import textcrafter_SD3Pipeline
-from pre_generation_sd3 import pre_generation_sd3
+from pre_generation import pre_generation
 from rectangles import generate_rectangles_gurobi, visualize_rectangles
 
 
@@ -26,7 +26,7 @@ def inference(
         width=1024,
         rectangle_name=None,
 ):
-    max_pixels = pre_generation_sd3(
+    max_pixels = pre_generation(
         NUM_DIFFUSION_STEPS=pre_generation_steps,
         height=height,
         width=width,
@@ -86,14 +86,14 @@ def main(
     output_dir = "textcrafter-sd3"
 
     for benchmark in ("CVTG","CVTG-Style"):
-    # for benchmark in ("CVTG-Style",): # 补跑
+    # for benchmark in ("CVTG-Style",):
         with open(f"/nasdata/dnk/benchmark/{benchmark}/{area}.json", 'r', encoding='utf-8') as file:
             json_data = json.load(file)
         # 获取 "data_list"
         data_list = json_data.get("data_list")
         for data in tqdm(data_list):
             index = data.get("index")
-            # if index < 238: continue # 跳过跑过的
+            # if index < 238: continue
             prompt = data.get("prompt")
             carrier_list = data.get("carrier_list")
             sentence_list = data.get("sentence_list")

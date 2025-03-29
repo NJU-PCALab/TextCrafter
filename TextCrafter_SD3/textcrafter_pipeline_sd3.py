@@ -42,14 +42,14 @@ from diffusers.utils.torch_utils import randn_tensor
 from diffusers.pipelines.pipeline_utils import DiffusionPipeline
 from diffusers.pipelines.stable_diffusion_3.pipeline_output import StableDiffusion3PipelineOutput
 
-import utils_sd3
-from init_sd3 import init_forwards_sd3
+import utils
+from init import init_forwards
 import random
 import importlib.util
 import sys
 
 module_name = 'diffusers.models.transformers.transformer_sd3'
-module_path = '../textcrafter_transformer_sd3.py'
+module_path = 'textcrafter_transformer_sd3.py'
 
 if module_name in sys.modules:
     del sys.modules[module_name]
@@ -1110,7 +1110,7 @@ class textcrafter_SD3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingleF
         self.w = width
         if (seed >= 0):
             self.torch_fix_seed(seed=seed)
-        init_forwards_sd3(self, self.transformer)  # Reset
+        init_forwards(self, self.transformer)  # Reset
 
 
         height = height or self.default_sample_size * self.vae_scale_factor
@@ -1184,7 +1184,7 @@ class textcrafter_SD3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingleF
             lora_scale=lora_scale,
         )
 
-        prompt_embeds = utils_sd3.embed_addition(carrier_list, prompt, self.tokenizer_3, prompt_embeds, addition)  # STEP1:Instance Fusion
+        prompt_embeds = utils.embed_addition(carrier_list, prompt, self.tokenizer_3, prompt_embeds, addition)  # STEP1:Instance Fusion
         
         (
             insulation_prompt_embeds_list,
@@ -1354,13 +1354,13 @@ class textcrafter_SD3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingleF
                     if i == insulation_steps:
                         del insulation_latents_list, insulation_latents_list_list, insulation_hidden_states_list_list_list, insulation_prompt_embeds_list, insulation_negative_prompt_embeds_list, insulation_pooled_prompt_embeds_list, insulation_negative_pooled_prompt_embeds_list, insulation_m_offset_list, insulation_n_offset_list, insulation_m_scale_list, insulation_n_scale_list
                         torch.cuda.empty_cache()
-                        controller = utils_sd3.AttentionReweight(
+                        controller = utils.AttentionReweight(
                             prompt,
                             num_inference_steps - insulation_steps,
                             cross_replace_steps=cross_replace_steps,
                             tokenizer=self.tokenizer_3
                         )
-                        utils_sd3.register_attention_control(self, controller)  # Register the controller to the model
+                        utils.register_attention_control(self, controller)  # Register the controller to the model
                     
                     noise_pred = self.transformer(
                         hidden_states=latent_model_input,

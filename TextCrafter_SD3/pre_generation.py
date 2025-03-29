@@ -1,10 +1,10 @@
 import torch
-import utils_sd3
-from utils_sd3 import AttentionControl, register_attention_control
+import utils
+from utils import AttentionControl, register_attention_control
 from diffusers import StableDiffusion3Pipeline
 
 # Modified from https://github.com/google/prompt-to-prompt.git. Unet->Dit
-def pre_generation_sd3(
+def pre_generation(
         NUM_DIFFUSION_STEPS=8,
         GUIDANCE_SCALE=3.5,
         MAX_NUM_WORDS=77+256, # prompt sequence length
@@ -23,7 +23,7 @@ def pre_generation_sd3(
     g_gpu = torch.Generator(device="cuda").manual_seed(seed)
     inds = []  # Index list of all carriers tokens
     for carrier in carrier_list:
-        ind = utils_sd3.get_word_inds(prompt, carrier, tokenizer)
+        ind = utils.get_word_inds(prompt, carrier, tokenizer)
         inds += ind
     inds = sorted(set(inds))
 
@@ -72,7 +72,7 @@ def pre_generation_sd3(
     )
     res = height // 16
     # Call aggregate_attention function to extract and process attention weights from attention_store, the result of attention_maps: shape is [res, res, num_tokens], and the attention weight distribution of each token is mapped to the latent space
-    attention_maps = utils_sd3.aggregate_attention(controller, res=res, from_where=("MM",), select=0)
+    attention_maps = utils.aggregate_attention(controller, res=res, from_where=("MM",), select=0)
     max_pixels = []  # Store the coordinates of the point with the maximum attention value
     for i in range(attention_maps.shape[-1]):
         flat_index = torch.argmax(attention_maps[:, :, i])
@@ -84,4 +84,4 @@ def pre_generation_sd3(
     return max_pixels
 
 if __name__ == "__main__":
-    print(pre_generation_sd3())
+    print(pre_generation())

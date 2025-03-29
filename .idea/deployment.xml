@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="test@114.212.172.176:10214 password (15)" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="test@114.212.172.176:10214 password (17)" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
       <paths name="test@114.212.165.228:10214 password">
         <serverdata>
@@ -160,6 +160,13 @@
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="test@114.212.172.176:10214 password (17)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/nasdata/dnk/TextCrafter" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>

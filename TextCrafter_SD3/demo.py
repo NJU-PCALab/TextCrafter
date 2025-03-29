@@ -1,7 +1,7 @@
 import fire
 import torch
 from textcrafter_pipeline_sd3 import textcrafter_SD3Pipeline
-from pre_generation_sd3 import pre_generation_sd3
+from pre_generation import pre_generation
 from rectangles import generate_rectangles_gurobi, visualize_rectangles
 
 
@@ -29,7 +29,7 @@ def main(
     ]
 
     height, width = 1024, 1024
-    max_pixels = pre_generation_sd3(
+    max_pixels = pre_generation(
         NUM_DIFFUSION_STEPS=pre_generation_steps,
         height=height,
         width=width,
