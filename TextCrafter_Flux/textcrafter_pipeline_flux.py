@@ -42,7 +42,7 @@ import importlib.util
 import sys
 
 module_name = 'diffusers.models.transformers.transformer_flux'
-module_path = './textcrafter_transformer_flux.py'
+module_path = '../textcrafter_transformer_flux.py'
 
 if module_name in sys.modules:
     del sys.modules[module_name]

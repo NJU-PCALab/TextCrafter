@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/textcrafter.iml" filepath="$PROJECT_DIR$/.idea/textcrafter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/TextCrafter.iml" filepath="$PROJECT_DIR$/.idea/TextCrafter.iml" />
     </modules>
   </component>
 </project>

@@ -49,7 +49,7 @@ import importlib.util
 import sys
 
 module_name = 'diffusers.models.transformers.transformer_sd3'
-module_path = './textcrafter_transformer_sd3.py'
+module_path = '../textcrafter_transformer_sd3.py'
 
 if module_name in sys.modules:
     del sys.modules[module_name]
