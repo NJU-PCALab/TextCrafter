@@ -33,9 +33,9 @@ TextCrafter consists of three steps. (a) *Instance Fusion*: Strengthen the conne
 
 ## ⏱️ News
 
-- __[2025.03.08]__: The dataset is released at [link](https://huggingface.co/datasets/dnkdnk/CVTG-2K).
+- __[2025.04.01]__: The dataset is released at [link](https://huggingface.co/datasets/dnkdnk/CVTG-2K).
 
-- __[2025.03.07]__: The code is available at [link](https://github.com/DnkNju/textcrafter.git).
+- __[2025.04.01]__: The code is available at [link](https://github.com/DnkNju/textcrafter.git). TextCrafter supports Flux and SD3.5!
 
 
 
