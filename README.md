@@ -61,7 +61,7 @@ Running the simple code below to perform inference verify whether the environmen
 cd TextCrafer_FLUX # or cd TextCrafer_SD3
 python demo.py
 ```
-If you downloaded the [FLUX.1 dev](https://huggingface.co/black-forest-labs/FLUX.1-dev) model in advance, please specify the model path in `demo.py` and `pre_generation.py`
+If you downloaded the [FLUX.1 dev](https://huggingface.co/black-forest-labs/FLUX.1-dev) or [SD3.5](https://huggingface.co/stabilityai/stable-diffusion-3.5-large)model in advance, please specify the model path in `demo.py` and `pre_generation.py`
 
 **Parameter Description:**
 
