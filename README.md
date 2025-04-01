@@ -1,6 +1,6 @@
 # TextCrafter: Accurately Rendering Multiple Texts in Complex Visual Scenes
 
-[//]: # (<a href='https://arxiv.org/abs/2311.16465'><img src='https://img.shields.io/badge/Arxiv-2311.16465-red'></a>)
+<a href='https://arxiv.org/abs/2503.23461'><img src='https://img.shields.io/badge/Arxiv-2503.23461-red'></a>
 <a href='https://github.com/NJU-PCALab/TextCrafter.git'><img src='https://img.shields.io/badge/Code-TextCrafter-yellow'></a>
 <a href='https://dnknju.github.io/textcrafter-vue/'><img src='https://img.shields.io/badge/Homepage-link-green'></a>
 [![Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset%20-CVTG_2K-blue)](https://huggingface.co/datasets/dnkdnk/CVTG-2K)
