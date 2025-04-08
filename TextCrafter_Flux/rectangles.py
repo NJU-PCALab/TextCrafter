@@ -3,6 +3,7 @@ from gurobipy import GRB
 import itertools
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+import random
 
 
 def generate_rectangles_gurobi(points, min_area, aspect_ratio_min=1.5, aspect_ratio_max=2.5):
@@ -167,6 +168,48 @@ def visualize_rectangles(rectangles, points, filename="Rectangle Placement Visua
     plt.close(fig)
 
     # plt.show()
+
+def generate_rectangles_random(area):
+    rectangles = []
+
+    for _ in range(area):
+        # Generate m_offset and n_offset in [0, 0.9)
+        m_offset = random.random() * 0.9
+        n_offset = random.random() * 0.9
+
+        # Generate m_scale in (0, 1-m_offset]
+        max_m_scale = 1 - m_offset
+        m_scale = random.uniform(0.1, max_m_scale)
+
+        # Generate n_scale in (0, 1-n_offset]
+        max_n_scale = 1 - n_offset
+        n_scale = random.uniform(0.1, max_n_scale)
+
+        # Create rectangle dictionary
+        rectangle = {
+            'm_offset': m_offset,
+            'n_offset': n_offset,
+            'm_scale': m_scale,
+            'n_scale': n_scale
+        }
+
+        rectangles.append(rectangle)
+
+    return rectangles
+
+
+def generate_rectangles_fix(area):
+    rectangles = []
+
+    if area == 2:
+        rectangles.append(
+            dict({
+
+            })
+        )
+
+    return rectangles
+
 
 # Debug
 if __name__ == "__main__":

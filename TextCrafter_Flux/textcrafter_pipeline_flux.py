@@ -189,6 +189,20 @@ class textcrafter_FluxPipeline(
     _optional_components = []
     _callback_tensor_inputs = ["latents", "prompt_embeds"]
 
+    @classmethod
+    def from_pipeline(cls, pipeline):
+        """从现有Pipeline创建实例"""
+        return cls(
+            scheduler=pipeline.scheduler,
+            vae=pipeline.vae,
+            text_encoder=pipeline.text_encoder,
+            tokenizer=pipeline.tokenizer,
+            text_encoder_2=pipeline.text_encoder_2,
+            tokenizer_2=pipeline.tokenizer_2,
+            transformer=pipeline.transformer
+        )
+
+
     def __init__(
             self,
             scheduler: FlowMatchEulerDiscreteScheduler,
@@ -826,11 +840,12 @@ class textcrafter_FluxPipeline(
             images.
         """
 
+        init_forwards(self, self.transformer)  # Reset
+
         self.h = height
         self.w = width
         if (seed >= 0):
             self.torch_fix_seed(seed=seed)
-        init_forwards(self, self.transformer)  # Reset
 
         height = height or self.default_sample_size * self.vae_scale_factor
         width = width or self.default_sample_size * self.vae_scale_factor

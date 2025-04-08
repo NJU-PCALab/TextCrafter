@@ -3,8 +3,9 @@ import utils
 from utils import AttentionControl, register_attention_control
 from diffusers import FluxPipeline
 
-# Modified from https://github.com/google/prompt-to-prompt.git. Unet->Dit
+# Unet->Dit. Modified from https://github.com/google/prompt-to-prompt.git
 def pre_generation(
+        ldm_flux,
         NUM_DIFFUSION_STEPS=8,
         GUIDANCE_SCALE=3.5,
         MAX_NUM_WORDS=512, # prompt sequence length
@@ -14,7 +15,9 @@ def pre_generation(
         prompt="In a bustling train station, a large banner says 'Faster, Greener, Smarter: The AI Train'. The departure board shows 'Express to Tech Valley: 8:30 AM'. A vending machine with the text 'Please Select'.",
         carrier_list=("banner","board","machine") # carriers keywords
 ):
-    ldm_flux = FluxPipeline.from_pretrained("/nasdata/dnk/checkpoints/FLUX.1-dev/", torch_dtype=torch.bfloat16).to("cuda")
+    # ldm_flux = FluxPipeline.from_pretrained("/share/dnk/checkpoints/FLUX.1-dev/", torch_dtype=torch.bfloat16).to("cuda")
+    # ldm_flux.load_lora_weights('/share/dnk/checkpoints/Hyper-SD', weight_name='Hyper-FLUX.1-dev-8steps-lora.safetensors')
+    # ldm_flux.fuse_lora(lora_scale=0.15)
     tokenizer = ldm_flux.tokenizer_2
 
     g_gpu = torch.Generator(device="cuda").manual_seed(seed)
