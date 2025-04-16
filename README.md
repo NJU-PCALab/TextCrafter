@@ -18,6 +18,23 @@ TextCrafter enables precise multi-region visual text rendering, addressing the c
 
 * We conduct extensive quantitative and qualitative experiments on the **CVTG-2K** benchmark. The results demonstrate that **TextCrafter** delivers exceptional performance, proving its superior effectiveness and robustness in tackling the CVTG task. 
 
+# 📖BibTeX
+If you find this work useful for your research and applications, please cite us using this BibTeX:
+```
+@article{du2025textcrafter,
+  title={TextCrafter: Accurately Rendering Multiple Texts in Complex Visual Scenes},
+  author={Du, Nikai and Chen, Zhennan and Chen, Zhizhou and Gao, Shan and Chen, Xi and Jiang, Zhengkai and Yang, Jian and Tai, Ying},
+  journal={arXiv preprint arXiv:2503.23461},
+  year={2025}
+}
+
+@article{chen2024region,
+  title={Region-Aware Text-to-Image Generation via Hard Binding and Soft Refinement},
+  author={Chen, Zhennan and Li, Yajie and Wang, Haofan and Chen, Zhibo and Jiang, Zhengkai and Li, Jun and Wang, Qian and Yang, Jian and Tai, Ying},
+  journal={arXiv preprint arXiv:2411.06558},
+  year={2024}
+}
+```
 
 ## 💡  Methodology
 
