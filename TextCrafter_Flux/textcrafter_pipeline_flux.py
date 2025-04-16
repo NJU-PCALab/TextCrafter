@@ -899,7 +899,7 @@ class textcrafter_FluxPipeline(
             lora_scale=lora_scale,
         )
 
-        prompt_embeds = utils.embed_addition(carrier_list, prompt, self.tokenizer_2, prompt_embeds, addition)  # STEP1:Instance Fusion
+        # prompt_embeds = utils.embed_addition(carrier_list, prompt, self.tokenizer_2, prompt_embeds, addition)  # STEP1:Instance Fusion
 
         (
             insulation_prompt_embeds_list,
@@ -1033,6 +1033,7 @@ class textcrafter_FluxPipeline(
                             tokenizer=self.tokenizer_2
                         )
                         utils.register_attention_control(self, controller)  # Register the controller to the model
+                        # controller = utils.EmptyControl()
 
                     noise_pred = self.transformer(
                         hidden_states=latents,

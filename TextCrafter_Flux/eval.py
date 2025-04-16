@@ -8,7 +8,7 @@ import json
 
 from textcrafter_pipeline_flux import textcrafter_FluxPipeline
 from pre_generation import pre_generation
-from rectangles import generate_rectangles_gurobi, visualize_rectangles,generate_rectangles_random
+from rectangles import generate_rectangles_gurobi, visualize_rectangles,generate_rectangles_random,generate_rectangles_fixed
 
 ldm_flux = FluxPipeline.from_pretrained("/share/dnk/checkpoints/FLUX.1-dev/",torch_dtype=torch.bfloat16).to("cuda")
 pipe = textcrafter_FluxPipeline.from_pipeline(ldm_flux)
@@ -40,7 +40,8 @@ def inference(
     #     carrier_list=carrier_list
     # )  # Pre-generation
     # rectangles = generate_rectangles_gurobi(points=max_pixels, min_area=min_area)  # Layout-optimizer
-    rectangles = generate_rectangles_random(area=area) # random layout
+    # rectangles = generate_rectangles_random(area=area) # random layout
+    rectangles = generate_rectangles_fixed(area=area)  # fixed layout
 
     # visualize_rectangles(rectangles=rectangles, points=max_pixels, filename=rectangle_name)
     torch.cuda.empty_cache()
@@ -85,17 +86,17 @@ def main(
     if min_area is None:  # 如果没提供，使用默认值
         min_area = min_area_default[area - 1]
 
-    output_dir = "random"
+    output_dir = "fixed"
 
-    for benchmark in ("CVTG","CVTG-Style"):
-    # for benchmark in ("CVTG-Style",):
+    # for benchmark in ("CVTG","CVTG-Style"):
+    for benchmark in ("CVTG-Style",):
         with open(f"/share/dnk/benchmark/{benchmark}/{area}.json", 'r', encoding='utf-8') as file:
             json_data = json.load(file)
         # 获取 "data_list"
         data_list = json_data.get("data_list")
         for data in tqdm(data_list):
             index = data.get("index")
-            # if index < 238: continue
+            # if index < 199: continue
             prompt = data.get("prompt")
             carrier_list = data.get("carrier_list")
             sentence_list = data.get("sentence_list")

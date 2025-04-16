@@ -198,14 +198,164 @@ def generate_rectangles_random(area):
     return rectangles
 
 
-def generate_rectangles_fix(area):
+def generate_rectangles_fixed(area):
     rectangles = []
-
-    if area == 2:
+    if area == 1:
         rectangles.append(
-            dict({
-
-            })
+            {
+                'm_offset': 0.1,
+                'n_offset': 0.2,
+                'm_scale': 0.8,
+                'n_scale': 0.6
+            }
+        )
+    elif area == 2:
+        rectangles.append(
+            {
+                'm_offset': 0.1,
+                'n_offset': 0.1,
+                'm_scale': 0.8,
+                'n_scale': 0.35
+            }
+        )
+        rectangles.append(
+            {
+                'm_offset': 0.1,
+                'n_offset': 0.55,
+                'm_scale': 0.8,
+                'n_scale': 0.35
+            }
+        )
+    elif area == 3:
+        rectangles.append(
+            {
+                'm_offset': 0.1,
+                'n_offset': 0.1,
+                'm_scale': 0.8,
+                'n_scale': 0.2
+            }
+        )
+        rectangles.append(
+            {
+                'm_offset': 0.1,
+                'n_offset': 0.4,
+                'm_scale': 0.8,
+                'n_scale': 0.2
+            }
+        )
+        rectangles.append(
+            {
+                'm_offset': 0.1,
+                'n_offset': 0.7,
+                'm_scale': 0.8,
+                'n_scale': 0.2
+            }
+        )
+    elif area == 4:
+        # rectangles.append(
+        #     {
+        #         'm_offset': 0.1,
+        #         'n_offset': 0.1,
+        #         'm_scale': 0.35,
+        #         'n_scale': 0.35
+        #     }
+        # )
+        # rectangles.append(
+        #     {
+        #         'm_offset': 0.55,
+        #         'n_offset': 0.1,
+        #         'm_scale': 0.35,
+        #         'n_scale': 0.35
+        #     }
+        # )
+        # rectangles.append(
+        #     {
+        #         'm_offset': 0.1,
+        #         'n_offset': 0.55,
+        #         'm_scale': 0.35,
+        #         'n_scale': 0.35
+        #     }
+        # )
+        # rectangles.append(
+        #     {
+        #         'm_offset': 0.55,
+        #         'n_offset': 0.55,
+        #         'm_scale': 0.35,
+        #         'n_scale': 0.35
+        #     }
+        # )
+        rectangles.append(
+            {
+                'm_offset': 0.1,
+                'n_offset': 0.1,
+                'm_scale': 0.8,
+                'n_scale': 0.125
+            }
+        )
+        rectangles.append(
+            {
+                'm_offset': 0.1,
+                'n_offset': 0.325,
+                'm_scale': 0.8,
+                'n_scale': 0.125
+            }
+        )
+        rectangles.append(
+            {
+                'm_offset': 0.1,
+                'n_offset': 0.55,
+                'm_scale': 0.8,
+                'n_scale': 0.125
+            }
+        )
+        rectangles.append(
+            {
+                'm_offset': 0.1,
+                'n_offset': 0.775,
+                'm_scale': 0.8,
+                'n_scale': 0.125
+            }
+        )
+    elif area == 5:
+        rectangles.append(
+            {
+                'm_offset': 0.1,
+                'n_offset': 0.1,
+                'm_scale': 0.8,
+                'n_scale': 0.2
+            }
+        )
+        rectangles.append(
+            {
+                'm_offset': 0.1,
+                'n_offset': 0.4,
+                'm_scale': 0.35,
+                'n_scale': 0.2
+            }
+        )
+        rectangles.append(
+            {
+                'm_offset': 0.55,
+                'n_offset': 0.4,
+                'm_scale': 0.35,
+                'n_scale': 0.2
+            }
+        )
+        rectangles.append(
+            {
+                'm_offset': 0.1,
+                'n_offset': 0.7,
+                'm_scale': 0.35,
+                'n_scale': 0.2
+            }
+        )
+        rectangles.append(
+            {
+                'm_offset': 0.55,
+                'n_offset': 0.7,
+                'm_scale': 0.35,
+                'n_scale': 0.2
+            }
         )
 
     return rectangles
