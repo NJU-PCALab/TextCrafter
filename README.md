@@ -68,7 +68,7 @@ Build up a new environment and install packages as follows:
 ```
 conda create -n textcrafter python==3.9 -y
 conda activate textcrafter
-pip install xformers==0.0.28.post1 diffusers==0.32.2 peft==0.14.0 torchvision==0.19.1 opencv-python==4.10.0.84 sentencepiece==0.2.0 protobuf==5.28.1 scipy==1.13.1 six==1.17.0 gurobipy==12.0.0 matplotlib==3.9.4
+pip install xformers==0.0.28.post1 diffusers==0.32.2 peft==0.14.0 torchvision==0.19.1 opencv-python==4.10.0.84 sentencepiece==0.2.0 protobuf==5.28.1 scipy==1.13.1 six==1.17.0 gurobipy==12.0.0 matplotlib==3.9.4 fire==0.5.0
 ```
 
 ## 🧨 Inference
