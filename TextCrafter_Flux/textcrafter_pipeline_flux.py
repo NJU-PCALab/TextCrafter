@@ -191,7 +191,7 @@ class textcrafter_FluxPipeline(
 
     @classmethod
     def from_pipeline(cls, pipeline):
-        """从现有Pipeline创建实例"""
+        """Create an instance from an existing Pipeline"""
         return cls(
             scheduler=pipeline.scheduler,
             vae=pipeline.vae,

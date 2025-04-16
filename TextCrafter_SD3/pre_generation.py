@@ -5,6 +5,7 @@ from diffusers import StableDiffusion3Pipeline
 
 # Modified from https://github.com/google/prompt-to-prompt.git. Unet->Dit
 def pre_generation(
+        ldm_sd3,
         NUM_DIFFUSION_STEPS=8,
         GUIDANCE_SCALE=3.5,
         MAX_NUM_WORDS=77+256, # prompt sequence length
@@ -14,10 +15,6 @@ def pre_generation(
         prompt="In a bustling train station, a large banner says 'Faster, Greener, Smarter: The AI Train'. The departure board shows 'Express to Tech Valley: 8:30 AM'. A vending machine with the text 'Please Select'.",
         carrier_list=("banner","board","machine") # carriers keywords
 ):
-    ldm_sd3 = StableDiffusion3Pipeline.from_pretrained("/nasdata/dnk/checkpoints/stable-diffusion-3.5-large", torch_dtype=torch.bfloat16).to("cuda")
-    ldm_sd3.text_encoder.to(torch.bfloat16)
-    ldm_sd3.text_encoder_2.to(torch.bfloat16)
-    ldm_sd3.text_encoder_3.to(torch.bfloat16) # stable diffusion3 bug
     tokenizer = ldm_sd3.tokenizer_3
 
     g_gpu = torch.Generator(device="cuda").manual_seed(seed)

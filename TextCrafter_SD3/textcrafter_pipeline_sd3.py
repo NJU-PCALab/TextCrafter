@@ -204,6 +204,23 @@ class textcrafter_SD3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingleF
     _optional_components = ["image_encoder", "feature_extractor"]
     _callback_tensor_inputs = ["latents", "prompt_embeds", "negative_prompt_embeds", "negative_pooled_prompt_embeds"]
 
+    @classmethod
+    def from_pipeline(cls, pipeline):
+        """Create an instance from an existing Pipeline"""
+        return cls(
+            transformer=pipeline.transformer,
+            scheduler=pipeline.scheduler,
+            vae=pipeline.vae,
+            text_encoder=pipeline.text_encoder,
+            tokenizer=pipeline.tokenizer,
+            text_encoder_2=pipeline.text_encoder_2,
+            tokenizer_2=pipeline.tokenizer_2,
+            text_encoder_3=pipeline.text_encoder_3,
+            tokenizer_3=pipeline.tokenizer_3,
+            image_encoder=pipeline.image_encoder,
+            feature_extractor=pipeline.feature_extractor
+        )
+
     def __init__(
         self,
         transformer: SD3Transformer2DModel,
