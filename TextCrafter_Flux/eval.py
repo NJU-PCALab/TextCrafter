@@ -20,7 +20,7 @@ def inference(
         sentence_list,
         min_area=None,
         pre_generation_steps=8,
-        insulation_steps=5,
+        insulation_steps=3,
         num_inference_steps=30,  # Sampling steps
         cross_replace_steps=1.0,  # Reweight execution steps(ratio)
         seed=0,
@@ -30,18 +30,18 @@ def inference(
         rectangle_name=None,
         area=None
 ):
-    # max_pixels = pre_generation(
-    #     ldm_flux=ldm_flux,
-    #     NUM_DIFFUSION_STEPS=pre_generation_steps,
-    #     height=height,
-    #     width=width,
-    #     seed=seed,
-    #     prompt=prompt,
-    #     carrier_list=carrier_list
-    # )  # Pre-generation
-    # rectangles = generate_rectangles_gurobi(points=max_pixels, min_area=min_area)  # Layout-optimizer
+    max_pixels = pre_generation(
+        ldm_flux=ldm_flux,
+        NUM_DIFFUSION_STEPS=pre_generation_steps,
+        height=height,
+        width=width,
+        seed=seed,
+        prompt=prompt,
+        carrier_list=carrier_list
+    )  # Pre-generation
+    rectangles = generate_rectangles_gurobi(points=max_pixels, min_area=min_area)  # Layout-optimizer
     # rectangles = generate_rectangles_random(area=area) # random layout
-    rectangles = generate_rectangles_fixed(area=area)  # fixed layout
+    # rectangles = generate_rectangles_fixed(area=area)  # fixed layout
 
     # visualize_rectangles(rectangles=rectangles, points=max_pixels, filename=rectangle_name)
     torch.cuda.empty_cache()
@@ -55,6 +55,17 @@ def inference(
         insulation_n_offset_list.append(rect['n_offset'])
         insulation_m_scale_list.append(rect['m_scale'])
         insulation_n_scale_list.append(rect['n_scale'])
+        
+    # 保存矩形坐标
+    rec_json = {
+        "HB_m_offset_list": insulation_m_offset_list,
+        "HB_n_offset_list": insulation_n_offset_list,
+        "HB_m_scale_list": insulation_m_scale_list,
+        "HB_n_scale_list": insulation_n_scale_list
+    }
+    # 写入JSON文件
+    with open(rectangle_name, 'w', encoding='utf-8') as file:
+        json.dump(rec_json, file, ensure_ascii=False, indent=4)
 
     image = pipe(
         sentence_list=sentence_list,
@@ -86,10 +97,10 @@ def main(
     if min_area is None:  # 如果没提供，使用默认值
         min_area = min_area_default[area - 1]
 
-    output_dir = "fixed"
+    output_dir = "TextCrafter_Flux"
 
-    # for benchmark in ("CVTG","CVTG-Style"):
-    for benchmark in ("CVTG-Style",):
+    for benchmark in ("CVTG","CVTG-Style"):
+    # for benchmark in ("CVTG-Style",):
         with open(f"/share/dnk/benchmark/{benchmark}/{area}.json", 'r', encoding='utf-8') as file:
             json_data = json.load(file)
         # 获取 "data_list"
@@ -100,9 +111,9 @@ def main(
             prompt = data.get("prompt")
             carrier_list = data.get("carrier_list")
             sentence_list = data.get("sentence_list")
-            rectangle_name = f"/share/dnk/IJCAI-eval/{output_dir}/{benchmark}/{area}/{index}_rec.json"
+            rectangle_name = f"/share/dnk/NIPS-eval/{output_dir}/{benchmark}/{area}/{index}_rec.json"
             image = inference(prompt, carrier_list, sentence_list, min_area=min_area,rectangle_name=rectangle_name,area=area)
-            filename = os.path.join(f"/share/dnk/IJCAI-eval/{output_dir}/{benchmark}/{area}", f"{index}.png")
+            filename = os.path.join(f"/share/dnk/NIPS-eval/{output_dir}/{benchmark}/{area}", f"{index}.png")
             image.save(filename)
 
 

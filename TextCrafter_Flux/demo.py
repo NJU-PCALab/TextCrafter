@@ -18,16 +18,16 @@ def main(
         min_area=0.2, # Minimum layout area, adjust according to the number of regions
         addition=0.4 # embed addition coefficient
 ):
-    prompt = "A retro book cover showing a detective holding a magnifying glass with 'Crime Scene' in bold, a title at the top that says 'The Mystery' in large italic, and the author name at the bottom with 'Coming Soon' in small regular letters."
+    prompt = "A poster of deep sea fish oil, with the title 'abc deep sea fish oil' in yellow font, and below it are its advantages, including the text 'mini particles' in blue font, and the text 'support heart' in blue font."
     carrier_list = [
-        "glass",
         "title",
-        "name"
+        "text",
+        "text"
     ]
     sentence_list = [
-        "a magnifying glass with 'Crime Scene' in bold.",
-        "a title at the top that says 'The Mystery' in large italic.",
-        "the author name at the bottom with 'Coming Soon' in small regular letters."
+        "the title 'abc deep sea fish oil' in yellow font",
+        "the text 'mini particles' in blue font",
+        "the text 'support heart' in blue font"
     ]
 
     height, width = 1024, 1024

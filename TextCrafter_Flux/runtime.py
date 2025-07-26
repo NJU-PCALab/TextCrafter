@@ -12,8 +12,8 @@ from pre_generation import pre_generation
 from rectangles import generate_rectangles_gurobi, visualize_rectangles,generate_rectangles_random
 
 ldm_flux = FluxPipeline.from_pretrained("/share/dnk/checkpoints/FLUX.1-dev/",torch_dtype=torch.bfloat16).to("cuda")
-ldm_flux.load_lora_weights('/share/dnk/checkpoints/Hyper-SD', weight_name='Hyper-FLUX.1-dev-8steps-lora.safetensors')
-ldm_flux.fuse_lora(lora_scale=0.15)
+# ldm_flux.load_lora_weights('/share/dnk/checkpoints/Hyper-SD', weight_name='Hyper-FLUX.1-dev-8steps-lora.safetensors')
+# ldm_flux.fuse_lora(lora_scale=0.15)
 pipe = textcrafter_FluxPipeline.from_pipeline(ldm_flux)
 
 @torch.no_grad()
@@ -22,9 +22,9 @@ def inference(
         carrier_list,
         sentence_list,
         min_area=None,
-        pre_generation_steps=2,
-        insulation_steps=2,
-        num_inference_steps=10,  # Sampling steps
+        pre_generation_steps=8,
+        insulation_steps=5,
+        num_inference_steps=30,  # Sampling steps
         cross_replace_steps=1.0,  # Reweight execution steps(ratio)
         seed=0,
         addition=0.4,  # embed addition coefficient
@@ -46,7 +46,7 @@ def inference(
     # rectangles = generate_rectangles_random(area=area) # random layout
 
     # visualize_rectangles(rectangles=rectangles, points=max_pixels, filename=rectangle_name)
-    torch.cuda.empty_cache()
+    # torch.cuda.empty_cache()
 
     insulation_m_offset_list = []  # x_min of bbox
     insulation_n_offset_list = []  # y_min of bbox
@@ -118,7 +118,7 @@ def main(
             # 计算执行时间
             execution_time = end_time - start_time
 
-            # 跳过第一个样本的计时，统计后面50个样本
+            # 跳过第一个样本的计时，统计后面10个样本
             sample_count += 1
             if sample_count > 1:  # 跳过第一个样本
                 execution_times.append(execution_time)
@@ -126,8 +126,8 @@ def main(
             filename = os.path.join(f"/share/dnk/IJCAI-eval/{output_dir}/{benchmark}/{area}", f"{index}.png")
             image.save(filename)
 
-            # 处理51个样本后停止循环（1个跳过 + 20个统计）
-            if sample_count >= 21:
+            # 处理51个样本后停止循环（1个跳过 + 5个统计）
+            if sample_count >= 6:
                 break
 
         # 计算并打印平均执行时间
