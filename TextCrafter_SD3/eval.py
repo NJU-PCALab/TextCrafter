@@ -93,7 +93,7 @@ def main(
         area=1,
         min_area=None
         ):
-    for area in range(5, 6):
+    for area in range(2, 6):
         min_area_default = (0.65, 0.3, 0.195, 0.145, 0.11)
         if min_area is None:  # 如果没提供，使用默认值
             min_area = min_area_default[area - 1]
