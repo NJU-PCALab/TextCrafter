@@ -133,6 +133,15 @@ CVTG-2K/
     └── 5_combined.json   
 ```
 
+## 📊 Evaluation
+
+To evaluate TextCrafter's performance on the CVTG-2K benchmark, you can generate batch results using the evaluation scripts and then assess them with our unified metrics tool:
+
+1. **Generate Results**: Use `TextCrafter_Flux/eval.py` or `TextCrafter_SD3/eval.py` to batch generate CVTG-2K results
+2. **Evaluate Metrics**: Use our comprehensive evaluation tool to compute 5 different metrics
+
+For detailed evaluation instructions and unified metrics calculation, please refer to: **[TextCrafter_Eval](TextCrafter_Eval)**
+
 ## 💌 Acknowledgement
 
 We feel thankful for the available code/model of [diffusers](https://github.com/huggingface/diffusers.git), [gurobi](https://support.gurobi.com/), [FLUX](https://huggingface.co/black-forest-labs/FLUX.1-dev), [Stable Diffusion](https://huggingface.co/stabilityai/stable-diffusion-3.5-large), [prompt-to-prompt](https://github.com/google/prompt-to-prompt.git), [RAG-Diffusion](https://github.com/NJU-PCALab/RAG-Diffusion.git).
