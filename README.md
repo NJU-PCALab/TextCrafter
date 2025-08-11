@@ -122,7 +122,7 @@ CVTG-2K/
 │   ├── 4_combined.json   
 │   ├── 5.json            
 │   └── 5_combined.json   
-└── CVTG-style/           # Data with attribute annotations
+└── CVTG-Style/           # Data with attribute annotations
     ├── 2.json            
     ├── 2_combined.json   
     ├── 3.json            

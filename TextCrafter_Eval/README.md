@@ -107,6 +107,8 @@ result_dir/
     └── 5/
 ```
 
+Supported image formats: `.png`, `.jpg`, `.jpeg` (case-insensitive).
+
 
 
 ## ⚠️ Important Notes
