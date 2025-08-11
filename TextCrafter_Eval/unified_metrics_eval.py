@@ -7,12 +7,10 @@ import re
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
 import logging
-
 import numpy as np
 from PIL import Image
 from tqdm import tqdm
 import torch
-
 
 def convert_numpy_types(obj):
     """Recursively convert numpy types to Python native types for JSON serialization"""
@@ -27,7 +25,6 @@ def convert_numpy_types(obj):
     elif isinstance(obj, list):
         return [convert_numpy_types(item) for item in obj]
     return obj
-
 
 class UnifiedMetricsEvaluator:
     def __init__(self, device: str = "auto", cache_dir: str = None, use_hf_mirror: bool = True):
@@ -360,7 +357,7 @@ class UnifiedMetricsEvaluator:
         
         results = {
             'word_accuracy_data': [],
-            'ned_word_data': [],  # 存储所有单词的编辑距离
+            'ned_word_data': [], 
             'clip_score_data': [],
             'vqa_score_data': [],
             'aesthetic_score_data': []
