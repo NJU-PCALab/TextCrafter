@@ -5,7 +5,7 @@ from textcrafter_pipeline_sd3 import textcrafter_SD3Pipeline
 from pre_generation import pre_generation
 from rectangles import generate_rectangles_gurobi, visualize_rectangles
 
-ldm_sd3 = StableDiffusion3Pipeline.from_pretrained("/nasdata/dnk/checkpoints/stable-diffusion-3.5-large",torch_dtype=torch.bfloat16).to("cuda")
+ldm_sd3 = StableDiffusion3Pipeline.from_pretrained("/share/dnk/checkpoint/stable-diffusion-3.5-large",torch_dtype=torch.bfloat16).to("cuda")
 ldm_sd3.text_encoder.to(torch.bfloat16)
 ldm_sd3.text_encoder_2.to(torch.bfloat16)
 ldm_sd3.text_encoder_3.to(torch.bfloat16)  # stable diffusion3 bug
@@ -58,8 +58,6 @@ def main(
         insulation_n_offset_list.append(rect['n_offset'])
         insulation_m_scale_list.append(rect['m_scale'])
         insulation_n_scale_list.append(rect['n_scale'])
-
-    pipe = textcrafter_SD3Pipeline.from_pretrained("/nasdata/dnk/checkpoints/stable-diffusion-3.5-large", torch_dtype=torch.bfloat16).to("cuda")
 
     image = pipe(
         sentence_list=sentence_list,
