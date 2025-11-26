@@ -13,11 +13,14 @@ def pre_generation(
         width=1024,
         seed=0,
         prompt="In a bustling train station, a large banner says 'Faster, Greener, Smarter: The AI Train'. The departure board shows 'Express to Tech Valley: 8:30 AM'. A vending machine with the text 'Please Select'.",
-        carrier_list=("banner","board","machine") # carriers keywords
+        carrier_list=("banner","board","machine"), # carriers keywords
+        device=None
 ):
     tokenizer = ldm_sd3.tokenizer_3
 
-    g_gpu = torch.Generator(device="cuda").manual_seed(seed)
+    if device is None:
+        device = ldm_sd3.device
+    g_gpu = torch.Generator(device=device).manual_seed(seed)
     inds = []  # Index list of all carriers tokens
     for carrier in carrier_list:
         ind = utils.get_word_inds(prompt, carrier, tokenizer)

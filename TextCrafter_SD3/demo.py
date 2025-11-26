@@ -9,6 +9,19 @@ ldm_sd3 = StableDiffusion3Pipeline.from_pretrained("/share/dnk/checkpoint/stable
 ldm_sd3.text_encoder.to(torch.bfloat16)
 ldm_sd3.text_encoder_2.to(torch.bfloat16)
 ldm_sd3.text_encoder_3.to(torch.bfloat16)  # stable diffusion3 bug
+# # peft LoRA (merged to keep transformer structure for attention hooks)
+# from peft import LoraConfig, get_peft_model
+# _lora_path = "/share/xr/code/DiffusionNFT/logs/nft/sd3/ocr/checkpoints/checkpoint-570/lora"
+# _target_modules = [
+#     "attn.add_k_proj", "attn.add_q_proj", "attn.add_v_proj", "attn.to_add_out",
+#     "attn.to_k", "attn.to_out.0", "attn.to_q", "attn.to_v",
+# ]
+# _lora_cfg = LoraConfig(r=32, lora_alpha=64, init_lora_weights="gaussian", target_modules=_target_modules)
+# ldm_sd3.transformer = get_peft_model(ldm_sd3.transformer, _lora_cfg)
+# ldm_sd3.transformer.load_adapter(_lora_path, adapter_name="default", is_trainable=False)
+# ldm_sd3.transformer.set_adapter("default")
+# ldm_sd3.transformer = ldm_sd3.transformer.merge_and_unload()
+# ldm_sd3.transformer.eval()
 pipe = textcrafter_SD3Pipeline.from_pipeline(ldm_sd3)
 
 

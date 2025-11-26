@@ -5,7 +5,10 @@ from textcrafter_pipeline_flux import textcrafter_FluxPipeline
 from pre_generation import pre_generation
 from rectangles import generate_rectangles_gurobi, visualize_rectangles
 
-ldm_flux = FluxPipeline.from_pretrained("/share/dnk/checkpoints/FLUX.1-dev/",torch_dtype=torch.bfloat16).to("cuda")
+ldm_flux = FluxPipeline.from_pretrained("/share/dnk/checkpoint/FLUX.1-dev/",torch_dtype=torch.bfloat16).to("cuda")
+# # diffusers LoRA
+# ldm_flux.load_lora_weights('/share/dnk/checkpoint/Hyper-SD', weight_name='Hyper-FLUX.1-dev-8steps-lora.safetensors')
+# ldm_flux.fuse_lora(lora_scale=0.125)
 pipe = textcrafter_FluxPipeline.from_pipeline(ldm_flux)
 
 @torch.no_grad()

@@ -1,7 +1,18 @@
 set -e
 
 echo "=== Activating textcrafter_eval environment ==="
-source ~/anaconda3/etc/profile.d/conda.sh
+# Robust conda activation: works for anaconda/miniconda and arbitrary prefixes
+if command -v conda >/dev/null 2>&1; then
+    eval "$(conda shell.bash hook)"
+else
+    # fallback to common locations
+    for cpath in "$HOME/miniconda3/etc/profile.d/conda.sh" "$HOME/anaconda3/etc/profile.d/conda.sh"; do
+        if [ -f "$cpath" ]; then
+            . "$cpath"
+            break
+        fi
+    done
+fi
 conda activate textcrafter_eval
 
 echo "=== Installing Python dependencies ==="

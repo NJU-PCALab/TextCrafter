@@ -22,7 +22,7 @@ A unified evaluation tool for 5 text-to-image generation metrics with one-click 
 ### Step 1: Clone the Repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/NJU-PCALab/TextCrafter.git
 cd TextCrafter_Eval
 ```
 
